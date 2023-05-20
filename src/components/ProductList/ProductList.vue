@@ -2,7 +2,7 @@
 
 import {getProducts} from "../../api/api.ts";
 import {AxiosError, AxiosResponse} from "axios";
-import {ProductIterface} from "../../interfaces/interfaces.ts";
+import {ProductInterface} from "../../interfaces/interfaces.ts";
 import Product from "../Product/Product.vue";
 
 export default {
@@ -10,33 +10,49 @@ export default {
   data() {
     return {
       model: {
-        products : [] as ProductIterface[]
+        products: [] as ProductInterface[],
+        deleteList: [] as number[],
       }
     }
   },
   methods: {
-
-  },
-  mounted() {
-    getProducts()
-        .then((res:AxiosResponse) => {
-          this.model.products = res.data
+    addProduct: function () {
+      this.$router.push('/add-product');
+    },
+    updateDeleteList: function (product_id: number) {
+      if (this.model.deleteList.includes(product_id)) {
+        this.model.deleteList = this.model.deleteList.filter(id => {
+          return id !== product_id
         })
-        .catch((err:AxiosError) => {
-          console.log(err)
-        })
+      } else {
+        this.model.deleteList.push(product_id)
+      }
+    }
+    },
+    mounted() {
+      getProducts()
+          .then((res: AxiosResponse) => {
+            this.model.products = res.data
+          })
+          .catch((err: AxiosError) => {
+            console.log(err)
+          })
+    }
   }
-}
 </script>
 
 <template>
-  <VContainer class="d-flex align-center">
-    <h1 class="d-inline-block">Product List </h1>
-    <VSpacer/>
-    <VBtn class="mr-5">Add</VBtn>
-    <VBtn class="" id="delete-product-btn" variant="outlined">Mass Delete</VBtn>
-  </VContainer>
-  <VContainer class="pa-0 d-flex flex-row flex-wrap">
-      <Product v-for="product in this.model.products" :product="product" />
-  </VContainer>
+  <div id="product-list">
+    <VContainer class="app-bar">
+      <h1>Product List </h1>
+      <VSpacer class="spacer"/>
+      <VBtn color="deep-purple-accent-3" @click="addProduct">Add</VBtn>
+      <VBtn id="delete-product-btn" variant="outlined" color="deep-purple-accent-3">Mass Delete</VBtn>
+    </VContainer>
+
+    <VContainer class="product-container-main">
+      <Product v-for="product in this.model.products" :product="product"
+               @updateDeleteList="updateDeleteList"/>
+    </VContainer>
+  </div>
 </template>

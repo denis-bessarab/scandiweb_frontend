@@ -82,5 +82,76 @@
         "length": 220
       }
     }
+  },
+  {
+    "id": 15,
+    "sku": "BK001",
+    "attributes": {
+      "name": "Clockwork Orange",
+      "weight": 0.3,
+      "price_usd": 15
+    }
+  },
+  {
+    "id": 16,
+    "sku": "DVD002",
+    "attributes": {
+      "name": "Lord of the Rings: The Two Towers",
+      "size_mb": 2000,
+      "price_usd": 20
+    }
+  },
+  {
+    "id": 17,
+    "sku": "FR001",
+    "attributes": {
+      "name": "Chair",
+      "price_usd": 10,
+      "dimensions": {
+        "wide": 30,
+        "height": 150,
+        "length": 30
+      }
+    }
+  },
+  {
+    "id": 18,
+    "sku": "DVD001",
+    "attributes": {
+      "name": "Lord of the Rings: The Fellowship of the Ring",
+      "size_mb": 2000,
+      "price_usd": 20
+    }
+  },
+  {
+    "id": 19,
+    "sku": "FR002",
+    "attributes": {
+      "name": "Table",
+      "price_usd": 30,
+      "dimensions": {
+        "wide": 120,
+        "height": 100,
+        "length": 120
+      }
+    }
+  },
+  {
+    "id": 20,
+    "sku": "BK002",
+    "attributes": {
+      "name": "Harry Potter and Deathly Hollows",
+      "weight": 0.4,
+      "price_usd": 20
+    }
+  },
+  {
+    "id": 22,
+    "sku": "DVD003",
+    "attributes": {
+      "name": "The Godfather",
+      "size_mb": 1800,
+      "price_usd": 20
+    }
   }
 ]
