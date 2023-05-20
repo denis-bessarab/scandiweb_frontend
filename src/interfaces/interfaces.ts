@@ -1,4 +1,4 @@
-export interface Product {
+export interface ProductIterface {
 	id: number,
 	sku: string,
 	attributes: ProductAttributes

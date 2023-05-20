@@ -2,7 +2,7 @@
 
 import {getProducts} from "../../api/api.ts";
 import {AxiosError, AxiosResponse} from "axios";
-import {Product} from "../../interfaces/interfaces.ts";
+import {ProductIterface} from "../../interfaces/interfaces.ts";
 import Product from "../Product/Product.vue";
 
 export default {
@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       model: {
-        products : [] as Product[]
+        products : [] as ProductIterface[]
       }
     }
   },
@@ -30,6 +30,13 @@ export default {
 </script>
 
 <template>
-  <h1>Hi, I am Product List Component <VIcon icon="mdi mdi-access-point"/></h1>
-  <Product v-for="product in this.model.products" :product="product" />
+  <VContainer class="d-flex align-center">
+    <h1 class="d-inline-block">Product List </h1>
+    <VSpacer/>
+    <VBtn class="mr-5">Add</VBtn>
+    <VBtn class="" id="delete-product-btn" variant="outlined">Mass Delete</VBtn>
+  </VContainer>
+  <VContainer class="pa-0 d-flex flex-row flex-wrap">
+      <Product v-for="product in this.model.products" :product="product" />
+  </VContainer>
 </template>

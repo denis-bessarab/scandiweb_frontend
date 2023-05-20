@@ -1,10 +1,9 @@
 <script lang="ts">
 
-import {Product} from "../../interfaces/interfaces.ts";
-
+import {ProductIterface} from "../../interfaces/interfaces.ts";
 export default {
   props: {
-    product: Object as Product
+    product: Object as ProductIterface
   },
   data() {
     return {
@@ -15,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <VCard class="product">
-    <h1>{{$props.product.id}}</h1>
-  </VCard>
+    <VCard class="product">
+      <h1>{{$props.product.id}}</h1>
+    </VCard>
 </template>

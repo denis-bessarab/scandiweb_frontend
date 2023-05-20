@@ -5,5 +5,7 @@
 </script>
 
 <template>
-  <RouterView />
+  <VApp class="bg-blue-grey-lighten-5">
+    <RouterView />
+  </VApp>
 </template>
