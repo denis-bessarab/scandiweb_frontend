@@ -13,7 +13,7 @@ export interface ProductAttributes {
 }
 
 export interface DimensionsAttribute {
-	wide: number,
+	width: number,
 	height: number,
 	length: number
 }
@@ -31,7 +31,7 @@ export interface AddProductModel {
 		size: null | number,
 		weight: null | number,
 		height: null | number,
-		wide: null | number,
+		width: null | number,
 		length: null | number,
 	}
 }

@@ -22,7 +22,7 @@ export default {
         <p>{{product.attributes.price_usd}} $</p>
         <p v-if="product.attributes.dimensions">
           Dimensions:
-          {{product.attributes.dimensions.height.toString()}}x{{product.attributes.dimensions.wide.toString()}}x{{product.attributes.dimensions.length.toString()}}
+          {{product.attributes.dimensions.height.toString()}}x{{product.attributes.dimensions.width.toString()}}x{{product.attributes.dimensions.length.toString()}}
         </p>
         <p v-if="product.attributes.size_mb">{{product.attributes.size_mb}} MB</p>
         <p v-if="product.attributes.weight">{{product.attributes.weight}} Kg</p>

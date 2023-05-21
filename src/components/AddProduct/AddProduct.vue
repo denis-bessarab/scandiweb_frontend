@@ -14,7 +14,7 @@ export default {
           size: null,
           weight: null,
           height: null,
-          wide: null,
+          width: null,
           length: null,
         }
       } as AddProductModel,
@@ -71,6 +71,7 @@ export default {
               variant="underlined"
               density="comfortable"
               v-model="model.sku"
+              id="sku"
           >
           </VTextField>
         </VRow>
@@ -80,6 +81,7 @@ export default {
               variant="underlined"
               density="comfortable"
               v-model="model.attributes.name"
+              id="name"
           >
           </VTextField>
         </VRow>
@@ -91,6 +93,7 @@ export default {
               type="number"
               v-model="model.attributes.price"
               min="0"
+              id="price"
           >
           </VTextField>
         </VRow>
@@ -102,10 +105,11 @@ export default {
               :items="selectItems"
               @update:model-value="clearAttributeFields"
               variant="underlined"
+              id="productType"
           ></VSelect>
         </VRow>
 
-        <VCard v-if="productType !== null" class="bg-blue-grey-lighten-5">
+        <VCard v-if="productType !== null" class="bg-blue-grey-lighten-5" id="{{this.productType}}">
           <VCardTitle>Product Attributes:</VCardTitle>
           <VRow v-if="productType === 'DVD'">
             <VListSubheader>Size (MB)</VListSubheader>
@@ -116,6 +120,7 @@ export default {
                 type="number"
                 v-model="model.attributes.size"
                 min="0"
+                id="size"
             >
             </VTextField>
           </VRow>
@@ -129,6 +134,7 @@ export default {
                 type="number"
                 v-model="model.attributes.weight"
                 min="0"
+                id="weight"
             >
             </VTextField>
           </VRow>
@@ -143,18 +149,20 @@ export default {
                   type="number"
                   v-model="model.attributes.height"
                   min="0"
+                  id="height"
               >
               </VTextField>
             </VRow>
             <VRow>
-              <VListSubheader>Wide (CM)</VListSubheader>
+              <VListSubheader>Width (CM)</VListSubheader>
               <VTextField
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
                   type="number"
-                  v-model="model.attributes.wide"
+                  v-model="model.attributes.width"
                   min="0"
+                  id="width"
               >
               </VTextField>
             </VRow>
@@ -167,9 +175,13 @@ export default {
                   type="number"
                   v-model="model.attributes.length"
                   min="0"
+                  id="length"
               >
               </VTextField>
             </VRow>
+            <p v-if="productType === 'DVD'" class="description">Please, provide size</p>
+            <p v-if="productType === 'Book'" class="description">Please, provide weight</p>
+            <p v-if="productType === 'Furniture'" class="description">Please, provide dimensions</p>
           </div>
         </VCard>
       </VForm>

@@ -36,7 +36,23 @@
   .attribute-field {
     margin: 0 20px 0 auto;
   }
+
+  .description {
+    font-size: 0.9rem;
+    margin-left: 20px;
+    margin-top: 20px;
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+  }
 }
+
+@media screen and (max-width: 900px) {
+  #add-product {
+    .v-text-field:not(.select-field) {
+      max-width: 360px;
+    }
+  }
+}
+
 
 @media screen and (max-width: 600px) {
  #add-product {
