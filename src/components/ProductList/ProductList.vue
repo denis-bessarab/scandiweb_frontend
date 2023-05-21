@@ -2,7 +2,8 @@
 
 import {getProducts} from "../../api/api.ts";
 import {AxiosError, AxiosResponse} from "axios";
-import {ProductInterface} from "../../interfaces/interfaces.ts";
+import {ProductListModel} from "../../interfaces/interfaces.ts";
+
 import Product from "../Product/Product.vue";
 
 export default {
@@ -10,13 +11,13 @@ export default {
   data() {
     return {
       model: {
-        products: [] as ProductInterface[],
-        deleteList: [] as number[],
-      }
+        products: [],
+        deleteList: [],
+      } as ProductListModel
     }
   },
   methods: {
-    addProduct: function () {
+    addProduct: function (): void {
       this.$router.push('/add-product');
     },
     updateDeleteList: function (product_id: number) {
@@ -28,17 +29,17 @@ export default {
         this.model.deleteList.push(product_id)
       }
     }
-    },
-    mounted() {
-      getProducts()
-          .then((res: AxiosResponse) => {
-            this.model.products = res.data
-          })
-          .catch((err: AxiosError) => {
-            console.log(err)
-          })
-    }
+  },
+  mounted() {
+    getProducts()
+        .then((res: AxiosResponse) => {
+          this.model.products = res.data
+        })
+        .catch((err: AxiosError) => {
+          console.log(err)
+        })
   }
+}
 </script>
 
 <template>

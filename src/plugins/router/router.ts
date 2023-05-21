@@ -7,7 +7,7 @@ const routes = [
 	{path: '/add-product', component: AddProduct},
 ]
 
-export const router:Router = createRouter({
+export const router: Router = createRouter({
 	history: createWebHistory(),
 	routes
 } as RouterOptions)

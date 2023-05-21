@@ -7,8 +7,8 @@ export interface ProductInterface {
 export interface ProductAttributes {
 	name: string,
 	price_usd: number,
-	weight?:number,
-	size_mb?:number,
+	weight?: number,
+	size_mb?: number,
 	dimensions?: DimensionsAttribute
 }
 
@@ -16,4 +16,29 @@ export interface DimensionsAttribute {
 	wide: number,
 	height: number,
 	length: number
+}
+
+export interface ProductListModel {
+	products: ProductInterface[],
+	deleteList: number[],
+}
+
+export interface AddProductModel {
+	sku: null | string,
+	attributes: {
+		name: null | string
+		price: null | number,
+		size: null | number,
+		weight: null | number,
+		height: null | number,
+		wide: null | number,
+		length: null | number,
+	}
+}
+
+export interface ProductToSave {
+	sku: string,
+	name: string,
+	price_usd: number,
+	attributes: ProductAttributes
 }

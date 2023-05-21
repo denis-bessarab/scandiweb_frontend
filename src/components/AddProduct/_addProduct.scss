@@ -1,0 +1,58 @@
+#add-product {
+  .v-row {
+    margin:0;
+  }
+
+  .v-list-subheader {
+    margin-left: 20px;
+    flex-basis: 10%;
+    min-width: 100px;
+  }
+
+  .v-text-field:not(.select-field) {
+    flex-basis: 30%;
+    max-width: 400px;
+  }
+
+  .select-field {
+    margin-left: 20px;
+    margin-top: 20px;
+    max-width: calc(400px + 10%);
+  }
+
+  .v-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(440px + 10%);
+    padding-bottom: 40px;
+    margin-top: 20px;
+  }
+
+  .v-card-title {
+    padding:20px;
+
+  }
+
+  .attribute-field {
+    margin: 0 20px 0 auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+ #add-product {
+   .v-text-field:not(.select-field) {
+     max-width: unset;
+     margin-right: 20px;
+   }
+
+   .select-field {
+     margin-right: 20px;
+     max-width: unset;
+   }
+
+   .v-card {
+     margin: 20px 10px 10px 10px;
+     width: unset;
+   }
+ }
+}
