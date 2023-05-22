@@ -64,6 +64,12 @@ export default {
         return entry[1] != null
       }))
       return productData
+    },
+    clearRequestErrorField: function () {
+      setTimeout(() => {
+        this.error.errorState = false
+        this.error.errorMessage = ''
+      },500)
     }
   }
 }
@@ -75,7 +81,7 @@ export default {
       <h1>Add Product </h1>
       <VSpacer class="spacer"/>
       <VBtn color="deep-purple-accent-3" @click="saveProduct">Save</VBtn>
-      <p v-if="error.errorState" id="error-message">{{error.errorMessage}}</p>
+      <VMessages :messages=this.error.errorMessage :active=this.error.errorState id="error-message"></VMessages>
       <VBtn id="cancel-btn" variant="outlined" color="deep-purple-accent-3" @click="backToProductList">Cancel</VBtn>
     </VContainer>
 
@@ -89,6 +95,7 @@ export default {
               v-model="model.sku"
               id="sku"
               :rules="[rules.required]"
+              @update:model-value="clearRequestErrorField"
           >
           </VTextField>
         </VRow>
@@ -100,6 +107,7 @@ export default {
               v-model="model.attributes.name"
               id="name"
               :rules="[rules.required]"
+              @update:model-value="clearRequestErrorField"
           >
           </VTextField>
         </VRow>
@@ -113,6 +121,7 @@ export default {
               min="0"
               id="price"
               :rules="[rules.required,rules.number]"
+              @update:model-value="clearRequestErrorField"
           >
           </VTextField>
         </VRow>
@@ -122,7 +131,7 @@ export default {
               v-model="productType"
               label="Product Type"
               :items="selectItems"
-              @update:model-value="clearAttributeFields"
+              @update:model-value="clearAttributeFields;clearRequestErrorField"
               variant="underlined"
               id="productType"
               :rules="[rules.required]"
@@ -141,6 +150,7 @@ export default {
                 min="0"
                 id="size"
                 :rules="[rules.required,rules.number]"
+                @update:model-value="clearRequestErrorField"
             >
             </VTextField>
           </VRow>
@@ -155,6 +165,7 @@ export default {
                 min="0"
                 id="weight"
                 :rules="[rules.required,rules.number]"
+                @update:model-value="clearRequestErrorField"
             >
             </VTextField>
           </VRow>
@@ -170,6 +181,7 @@ export default {
                   min="0"
                   id="height"
                   :rules="[rules.required,rules.number]"
+                  @update:model-value="clearRequestErrorField"
               >
               </VTextField>
             </VRow>
@@ -183,6 +195,7 @@ export default {
                   min="0"
                   id="width"
                   :rules="[rules.required,rules.number]"
+                  @update:model-value="clearRequestErrorField"
               >
               </VTextField>
             </VRow>
@@ -196,6 +209,7 @@ export default {
                   min="0"
                   id="length"
                   :rules="[rules.required,rules.number]"
+                  @update:model-value="clearRequestErrorField"
               >
               </VTextField>
             </VRow>

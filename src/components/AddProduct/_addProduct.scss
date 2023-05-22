@@ -47,11 +47,17 @@
   #error-message {
     position: absolute;
     bottom: 0;
-    right:0;
+    left:0;
+    font-family: sans-serif;
     margin-right: 20px;
-    margin-bottom: 10px;
+    transform: translateY(calc(100% + 20px));
+    -webkit-transform: translateY(calc(100% + 20px));
+    -moz-transform: translateY(calc(100% + 20px));
     font-size: 12px;
-    color: rgb(var(--v-theme-error));;
+    font-weight: 600;
+    line-height: 12px;
+    color: rgb(var(--v-theme-error));
+    flex:unset;
   }
 }
 
