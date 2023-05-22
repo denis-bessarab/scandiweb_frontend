@@ -43,6 +43,16 @@
     margin-top: 20px;
     color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
   }
+
+  #error-message {
+    position: absolute;
+    bottom: 0;
+    right:0;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: rgb(var(--v-theme-error));;
+  }
 }
 
 @media screen and (max-width: 900px) {

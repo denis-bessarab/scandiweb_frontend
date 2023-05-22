@@ -20,17 +20,32 @@ export default {
       } as AddProductModel,
       selectItems: ['DVD', 'Book', 'Furniture'] as string[],
       productType: null as null | string,
+      rules: {
+        required: value => !!value || 'Please, submit required data',
+        number: value => /^[0-9]+$/.test(value) || 'Please, provide the data of indicated type'
+      },
+      error: {
+        errorState: false as boolean,
+        errorMessage: '' as string,
+      },
     }
   },
   methods: {
     saveProduct: function () {
-      let data = this.removeNullFields()
-      saveProduct(data)
-          .then((res: AxiosResponse) => {
-            console.log(res)
-          })
-          .catch((err: AxiosError) => {
-            console.log(err)
+      this.$refs.product_form.validate()
+          .then(res => {
+            if (res.valid) {
+              let data = this.removeNullFields()
+              saveProduct(data)
+                  .then((res: AxiosResponse) => {
+                    console.log(res)
+                  })
+                  .catch((err: AxiosError) => {
+                    this.error.errorState = true
+                    this.error.errorMessage = "Error: " + err.message
+                    console.log(err)
+                  })
+            }
           })
     },
     backToProductList: function () {
@@ -60,11 +75,12 @@ export default {
       <h1>Add Product </h1>
       <VSpacer class="spacer"/>
       <VBtn color="deep-purple-accent-3" @click="saveProduct">Save</VBtn>
+      <p v-if="error.errorState" id="error-message">{{error.errorMessage}}</p>
       <VBtn id="cancel-btn" variant="outlined" color="deep-purple-accent-3" @click="backToProductList">Cancel</VBtn>
     </VContainer>
 
     <VContainer class="add-product-container-main">
-      <VForm id="product_form">
+      <VForm id="product_form" ref="product_form">
         <VRow>
           <VListSubheader>SKU</VListSubheader>
           <VTextField
@@ -72,6 +88,7 @@ export default {
               density="comfortable"
               v-model="model.sku"
               id="sku"
+              :rules="[rules.required]"
           >
           </VTextField>
         </VRow>
@@ -82,6 +99,7 @@ export default {
               density="comfortable"
               v-model="model.attributes.name"
               id="name"
+              :rules="[rules.required]"
           >
           </VTextField>
         </VRow>
@@ -90,10 +108,11 @@ export default {
           <VTextField
               variant="underlined"
               density="comfortable"
-              type="number"
+
               v-model="model.attributes.price"
               min="0"
               id="price"
+              :rules="[rules.required,rules.number]"
           >
           </VTextField>
         </VRow>
@@ -106,6 +125,7 @@ export default {
               @update:model-value="clearAttributeFields"
               variant="underlined"
               id="productType"
+              :rules="[rules.required]"
           ></VSelect>
         </VRow>
 
@@ -117,10 +137,10 @@ export default {
                 class="attribute-field"
                 variant="underlined"
                 density="comfortable"
-                type="number"
                 v-model="model.attributes.size"
                 min="0"
                 id="size"
+                :rules="[rules.required,rules.number]"
             >
             </VTextField>
           </VRow>
@@ -131,10 +151,10 @@ export default {
                 class="attribute-field"
                 variant="underlined"
                 density="comfortable"
-                type="number"
                 v-model="model.attributes.weight"
                 min="0"
                 id="weight"
+                :rules="[rules.required,rules.number]"
             >
             </VTextField>
           </VRow>
@@ -146,10 +166,10 @@ export default {
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
-                  type="number"
                   v-model="model.attributes.height"
                   min="0"
                   id="height"
+                  :rules="[rules.required,rules.number]"
               >
               </VTextField>
             </VRow>
@@ -159,10 +179,10 @@ export default {
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
-                  type="number"
                   v-model="model.attributes.width"
                   min="0"
                   id="width"
+                  :rules="[rules.required,rules.number]"
               >
               </VTextField>
             </VRow>
@@ -172,10 +192,10 @@ export default {
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
-                  type="number"
                   v-model="model.attributes.length"
                   min="0"
                   id="length"
+                  :rules="[rules.required,rules.number]"
               >
               </VTextField>
             </VRow>
