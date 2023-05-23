@@ -1,0 +1,29 @@
+name: Build Parallel Branch
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Vue app
+        run: npm run build
+
+      - name: Create parallel branch
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout -b production
+          git add dist/
+          git commit -m "Add parallel build"
+          git push origin production
