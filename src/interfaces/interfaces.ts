@@ -5,14 +5,13 @@ export interface ProductInterface {
 }
 
 export interface ProductAttributes {
-	[k: string]: string | number | null,
-	name: string,
-	price_usd: number,
-	weight: number,
-	size_mb: number,
-	width: number,
-	height: number,
-	length: number
+	name?: string,
+	price_usd?: number,
+	weight?: number,
+	size_mb?: number,
+	width?: number,
+	height?: number,
+	length?: number
 }
 
 export interface ProductListModel {
@@ -23,13 +22,13 @@ export interface ProductListModel {
 export interface AddProductModel {
 	sku: null | string,
 	attributes: {
-		name: null | string
-		price_usd: null | number,
-		size_mb: null | number,
-		weight: null | number,
-		height: null | number,
-		width: null | number,
-		length: null | number,
+		name?: null | string
+		price_usd?: null | number,
+		size_mb?: null | number,
+		weight?: null | number,
+		height?: null | number,
+		width?: null | number,
+		length?: null | number,
 	}
 }
 

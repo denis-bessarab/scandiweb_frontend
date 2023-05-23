@@ -40,38 +40,37 @@ export default {
         case 'Furniture':
           return 'Please, provide dimensions'
         default :
-         return ''
+          return ''
       }
 
     }
   },
   methods: {
     saveProduct: function () {
-      let form = this.$refs.product_form
-      if(typeof form === "object") {
-        form.validate()
-            .then((res: { valid: boolean }) => {
-              if (res.valid) {
-                let data = JSON.stringify(this.removeNullFields())
-                saveProduct(data)
-                    .then((res: AxiosResponse) => {
-                      if (res.status === 200) {
-                        this.$router.push('/')
-                      } else {
-                        console.log(res)
-                      }
-                    })
-                    .catch((err: AxiosError) => {
-                      this.error.errorState = true
-                      if (err.response) {
-                        this.error.errorMessage = "Error: " + err.response.data
-                      }
-                      console.log(err)
-                    })
-              }
-            })
-      }
-
+      const form = this.$refs.form as any & { validate: () => boolean }
+        if(typeof form === 'object' && form !== null){
+          form.validate()
+          .then((res: { valid: boolean }) => {
+            if (res.valid) {
+              let data = JSON.stringify(this.removeNullFields())
+              saveProduct(data)
+                  .then((res: AxiosResponse<any,any> | AxiosError<unknown, any>) => {
+                    if (res.status === 200) {
+                      this.$router.push('/')
+                    } else {
+                      console.log(res)
+                    }
+                  })
+                  .catch((err: AxiosError) => {
+                    this.error.errorState = true
+                    if (err.response) {
+                      this.error.errorMessage = "Error: " + err.response.data
+                    }
+                    console.log(err)
+                  })
+            }
+          })
+        }
     },
     backToProductList: function () {
       this.$router.push('/')
