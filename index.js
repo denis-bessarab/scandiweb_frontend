@@ -8,7 +8,7 @@ const __dirname = dirname('/')
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/', (req, res) => {
-    res.redirect('/index.html');
+    res.redirect('dist/index.html');
 });
 
 app.listen(process.env.PORT || 8080)
