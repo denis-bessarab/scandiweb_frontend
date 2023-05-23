@@ -14,11 +14,53 @@
     max-width: 400px;
   }
 
-  .select-field {
+  .select-field, {
     margin-left: 20px;
     margin-top: 20px;
     max-width: calc(400px + 10%);
   }
+
+  //SELECT FIELD FOR TEST
+  .ugly_select_for_test,.ugly_select_for_test_label {
+    margin-left: 20px;
+    margin-top: 20px;
+    max-width: calc(400px + 10%);
+  }
+  .ugly_select_for_test_container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+  }
+
+  .ugly_select_for_test {
+    border: 1px solid #B0BEC5;
+    background-color: rgba(176, 190, 197, 0.1);
+    width: 100%;
+    max-width: 142px;
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+    font-size: 0.875rem;
+    option {
+      color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+    }
+  }
+
+  .ugly_select_for_test:focus {
+    outline: none;
+  }
+  .ugly_select_for_test_label {
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+    font-size: 0.875rem;
+  }
+
+
+  
+  @media screen and (max-width: 450px) {
+    .ugly_select_for_test {
+      max-width: calc(100% - 40px);
+    }
+  }
+
+
 
   .v-card {
     display: flex;

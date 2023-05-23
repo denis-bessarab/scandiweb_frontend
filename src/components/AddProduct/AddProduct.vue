@@ -18,7 +18,7 @@ export default {
           length: null,
         }
       } as AddProductModel,
-      selectItems: ['DVD', 'Book', 'Furniture'] as string[],
+      selectItems: ["DVD", 'Book', 'Furniture'] as string[],
       productType: null as null | string,
       rules: {
         required: (value: string) => !!value || 'Please, submit required data',
@@ -150,16 +150,25 @@ export default {
           </VTextField>
         </VRow>
         <VRow>
-          <VSelect
-              class="select-field"
-              v-model="productType"
-              label="Product Type"
-              :items="selectItems"
-              @update:model-value="clearAttributeFields();clearRequestErrorField()"
-              variant="underlined"
-              id="productType"
-              :rules="[rules.required]"
-          ></VSelect>
+          <div class="ugly_select_for_test_container">
+            <label for="productType" class="ugly_select_for_test_label">Select Product Type</label>
+            <select class="ugly_select_for_test" id="productType" name="productType" v-model="productType" @update:model-value="clearAttributeFields();clearRequestErrorField()" required>
+              <option value="DVD">{{selectItems[0]}}</option>
+              <option value="Book">{{selectItems[1]}}</option>
+              <option value="Furniture">{{selectItems[2]}}</option>
+            </select>
+          </div>
+<!--          <VSelect-->
+<!--              class="select-field"-->
+<!--              v-model="productType"-->
+<!--              label="Product Type"-->
+<!--              :items="selectItems"-->
+<!--              @update:model-value="clearAttributeFields();clearRequestErrorField()"-->
+<!--              variant="underlined"-->
+<!--              id="productType"-->
+<!--              :rules="[rules.required]"-->
+<!--          >-->
+<!--          </VSelect>-->
         </VRow>
 
         <VCard v-if="productType !== null" class="bg-blue-grey-lighten-5" id="{{this.productType}}">
