@@ -6,4 +6,4 @@ const app = express()
 const __dirname = dirname('/')
 
 app.use(express.static(__dirname + 'dist'))
-app.listen(80)
+app.listen(process.env.PORT || 8080)
