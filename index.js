@@ -1,11 +1,14 @@
-import express from 'express'
-import { dirname } from 'path'
-import * as path from "path";
+import express from 'express';
+import * as path from 'path';
 
-const app = express()
+const app = express();
 
-const __dirname = dirname('/')
+const staticDir = path.join(__dirname, 'dist');
+app.use(express.static(staticDir));
 
-app.use(express.static(path.join(__dirname)));
-
-app.listen(process.env.PORT || 8080)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(staticDir, 'index.html'));
+});
+app.listen(process.env.PORT || 8080, () => {
+    console.log('Server is running on port', process.env.PORT || 8080);
+});
