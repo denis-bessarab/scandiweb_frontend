@@ -1,10 +1,10 @@
-const express = require('express')
-const serveStatic = require('serve-static')
-const path = require('path')
+const express = import ('express')
+const serveStatic = import('serve-static')
+const path = import('path')
 
-const app = express()
+const app = (await express)()
 
-app.use('/',serveStatic(path.join(__dirname,'/dist')))
+app.use('/',(await serveStatic)(path.join(__dirname,'/dist')))
 
 app.listen(443)
 
