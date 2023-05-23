@@ -47,14 +47,14 @@ export default {
   },
   methods: {
     saveProduct: function () {
-      const form = this.$refs.form as any & { validate: () => boolean }
+      const form = this.$refs.product_form as any & { validate: () => boolean }
         if(typeof form === 'object' && form !== null){
           form.validate()
           .then((res: { valid: boolean }) => {
             if (res.valid) {
               let data = JSON.stringify(this.removeNullFields())
               saveProduct(data)
-                  .then((res: AxiosResponse<any,any> | AxiosError<unknown, any>) => {
+                  .then((res: AxiosResponse) => {
                     if (res.status === 200) {
                       this.$router.push('/')
                     } else {

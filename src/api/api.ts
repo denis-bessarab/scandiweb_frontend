@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosResponse} from "axios"
+import axios, {AxiosResponse} from "axios"
 // import {ProductToSave} from "../interfaces/interfaces.ts";
 
 const ENV = import.meta.env
@@ -8,14 +8,14 @@ const axiosConfig = {
 	}
 }
 
-export async function getProducts(): Promise<AxiosResponse | AxiosError> {
+export async function getProducts(): Promise<AxiosResponse> {
 	return await axios.get(API_URL + '/getProducts', axiosConfig)
 }
 
-export async function saveProduct(data: string): Promise<AxiosResponse | AxiosError> {
+export async function saveProduct(data: string): Promise<AxiosResponse> {
 	return await axios.post(API_URL + '/addProduct', data, axiosConfig)
 }
-export async function deleteProduct(data: number[]): Promise<AxiosResponse<any,any>> {
+export async function deleteProduct(data: number[]): Promise<AxiosResponse> {
 	let axiosDeleteConfig = {
 		headers:{
 
