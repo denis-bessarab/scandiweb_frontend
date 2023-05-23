@@ -135,7 +135,7 @@ export default {
               v-model="productType"
               label="Product Type"
               :items="selectItems"
-              @update:model-value="clearAttributeFields;clearRequestErrorField"
+              @update:model-value="clearAttributeFields();clearRequestErrorField()"
               variant="underlined"
               id="productType"
               :rules="[rules.required]"
