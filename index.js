@@ -7,7 +7,8 @@ const app = express()
 
 const __dirname = dirname('/')
 
-app.use(express.static(path.join(__dirname, 'dist/*')));
+app.use(express.static(path.join(__dirname, 'dist/')));
+app.use(express.static(path.join(__dirname, 'assets/')));
 app.get('/', (req, res) => {
     fs.readFile('dist/index.html',(err,data) => {
         if(err) throw err
