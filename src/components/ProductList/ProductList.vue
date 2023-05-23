@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import {getProducts} from "../../api/api.ts";
+import {deleteProduct, getProducts} from "../../api/api.ts";
 import {AxiosError, AxiosResponse} from "axios";
 import {ProductListModel} from "../../interfaces/interfaces.ts";
 
@@ -28,16 +28,30 @@ export default {
       } else {
         this.model.deleteList.push(product_id)
       }
+    },
+    getData() {
+      getProducts()
+          .then((res: AxiosResponse) => {
+            this.model.products = res.data
+          })
+          .catch((err: AxiosError) => {
+            console.log(err)
+          })
+    },
+    massDelete: function() {
+      deleteProduct(this.model.deleteList)
+          .then(res => {
+            if(res.status === 200) {
+              this.getData()
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
     }
   },
   mounted() {
-    getProducts()
-        .then((res: AxiosResponse) => {
-          this.model.products = res.data
-        })
-        .catch((err: AxiosError) => {
-          console.log(err)
-        })
+    this.getData()
   }
 }
 </script>
@@ -48,7 +62,7 @@ export default {
       <h1>Product List </h1>
       <VSpacer class="spacer"/>
       <VBtn color="deep-purple-accent-3" @click="addProduct">Add</VBtn>
-      <VBtn id="delete-product-btn" variant="outlined" color="deep-purple-accent-3">Mass Delete</VBtn>
+      <VBtn id="delete-product-btn" variant="outlined" color="deep-purple-accent-3" @click="massDelete">Mass Delete</VBtn>
     </VContainer>
 
     <VContainer class="product-container-main">

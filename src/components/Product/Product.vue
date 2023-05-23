@@ -20,9 +20,9 @@ export default {
         <h4>{{product.sku}}</h4>
         <p>{{product.attributes.name}}</p>
         <p>{{product.attributes.price_usd}} $</p>
-        <p v-if="product.attributes.dimensions">
+        <p v-if="product.attributes.height">
           Dimensions:
-          {{product.attributes.dimensions.height.toString()}}x{{product.attributes.dimensions.width.toString()}}x{{product.attributes.dimensions.length.toString()}}
+          {{product.attributes.height}}x{{product.attributes.width}}x{{product.attributes.length}}
         </p>
         <p v-if="product.attributes.size_mb">{{product.attributes.size_mb}} MB</p>
         <p v-if="product.attributes.weight">{{product.attributes.weight}} Kg</p>

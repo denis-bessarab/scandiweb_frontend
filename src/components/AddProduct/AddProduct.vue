@@ -10,8 +10,8 @@ export default {
         sku: null,
         attributes: {
           name: null,
-          price: null,
-          size: null,
+          price_usd: null,
+          size_mb: null,
           weight: null,
           height: null,
           width: null,
@@ -22,7 +22,7 @@ export default {
       productType: null as null | string,
       rules: {
         required: value => !!value || 'Please, submit required data',
-        number: value => /^[0-9]+$/.test(value) || 'Please, provide the data of indicated type'
+        number: value => /^\d+(([.])+[0-9]{1,2})?$/.test(value) || 'Please, provide the data of indicated type'
       },
       error: {
         errorState: false as boolean,
@@ -35,14 +35,18 @@ export default {
       this.$refs.product_form.validate()
           .then(res => {
             if (res.valid) {
-              let data = this.removeNullFields()
+              let data = JSON.stringify(this.removeNullFields())
               saveProduct(data)
                   .then((res: AxiosResponse) => {
-                    console.log(res)
+                    if(res.status === 200) {
+                      this.$router.push('/')
+                    } else {
+                      console.log(res)
+                    }
                   })
                   .catch((err: AxiosError) => {
                     this.error.errorState = true
-                    this.error.errorMessage = "Error: " + err.message
+                    this.error.errorMessage = "Error: " + err.response.data
                     console.log(err)
                   })
             }
@@ -117,7 +121,7 @@ export default {
               variant="underlined"
               density="comfortable"
 
-              v-model="model.attributes.price"
+              v-model="model.attributes.price_usd"
               min="0"
               id="price"
               :rules="[rules.required,rules.number]"
@@ -146,7 +150,7 @@ export default {
                 class="attribute-field"
                 variant="underlined"
                 density="comfortable"
-                v-model="model.attributes.size"
+                v-model="model.attributes.size_mb"
                 min="0"
                 id="size"
                 :rules="[rules.required,rules.number]"

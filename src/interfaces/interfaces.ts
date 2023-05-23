@@ -9,13 +9,9 @@ export interface ProductAttributes {
 	price_usd: number,
 	weight?: number,
 	size_mb?: number,
-	dimensions?: DimensionsAttribute
-}
-
-export interface DimensionsAttribute {
-	width: number,
-	height: number,
-	length: number
+	width?: number,
+	height?: number,
+	length?: number
 }
 
 export interface ProductListModel {
@@ -27,8 +23,8 @@ export interface AddProductModel {
 	sku: null | string,
 	attributes: {
 		name: null | string
-		price: null | number,
-		size: null | number,
+		price_usd: null | number,
+		size_mb: null | number,
 		weight: null | number,
 		height: null | number,
 		width: null | number,
