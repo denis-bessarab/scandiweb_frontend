@@ -1,5 +1,4 @@
 import axios, {AxiosResponse} from "axios"
-// import {ProductToSave} from "../interfaces/interfaces.ts";
 
 const ENV = import.meta.env
 const API_URL: string = ENV.VITE_API_URL

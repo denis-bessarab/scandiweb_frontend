@@ -61,8 +61,8 @@ export default {
     <VContainer class="app-bar">
       <h1>Product List </h1>
       <VSpacer class="spacer"/>
-      <VBtn color="deep-purple-accent-3" @click="addProduct">Add</VBtn>
-      <VBtn id="delete-product-btn" variant="outlined" color="deep-purple-accent-3" @click="massDelete">Mass Delete</VBtn>
+      <VBtn color="deep-purple-accent-3" @click="addProduct">ADD</VBtn>
+      <VBtn id="delete-product-btn" variant="outlined" color="deep-purple-accent-3" @click="massDelete">MASS DELETE</VBtn>
     </VContainer>
 
     <VContainer class="product-container-main">
