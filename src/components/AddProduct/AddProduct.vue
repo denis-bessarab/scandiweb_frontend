@@ -21,8 +21,8 @@ export default {
       selectItems: ['DVD', 'Book', 'Furniture'] as string[],
       productType: null as null | string,
       rules: {
-        required: value => !!value || 'Please, submit required data',
-        number: value => /^\d+(([.])+[0-9]{1,2})?$/.test(value) || 'Please, provide the data of indicated type'
+        required: (value: string) => !!value || 'Please, submit required data',
+        number: (value: string) => /^\d+(([.])+[0-9]{1,2})?$/.test(value) || 'Please, provide the data of indicated type'
       },
       error: {
         errorState: false as boolean,
@@ -30,36 +30,57 @@ export default {
       },
     }
   },
+  computed: {
+    descriptionCopy() {
+      switch (this.productType) {
+        case 'DVD':
+          return 'Please, provide size'
+        case 'Book':
+          return 'Please, provide weight'
+        case 'Furniture':
+          return 'Please, provide dimensions'
+        default :
+         return ''
+      }
+
+    }
+  },
   methods: {
     saveProduct: function () {
-      this.$refs.product_form.validate()
-          .then(res => {
-            if (res.valid) {
-              let data = JSON.stringify(this.removeNullFields())
-              saveProduct(data)
-                  .then((res: AxiosResponse) => {
-                    if(res.status === 200) {
-                      this.$router.push('/')
-                    } else {
-                      console.log(res)
-                    }
-                  })
-                  .catch((err: AxiosError) => {
-                    this.error.errorState = true
-                    this.error.errorMessage = "Error: " + err.response.data
-                    console.log(err)
-                  })
-            }
-          })
+      let form = this.$refs.product_form
+      if(typeof form === "object") {
+        form.validate()
+            .then((res: { valid: boolean }) => {
+              if (res.valid) {
+                let data = JSON.stringify(this.removeNullFields())
+                saveProduct(data)
+                    .then((res: AxiosResponse) => {
+                      if (res.status === 200) {
+                        this.$router.push('/')
+                      } else {
+                        console.log(res)
+                      }
+                    })
+                    .catch((err: AxiosError) => {
+                      this.error.errorState = true
+                      if (err.response) {
+                        this.error.errorMessage = "Error: " + err.response.data
+                      }
+                      console.log(err)
+                    })
+              }
+            })
+      }
+
     },
     backToProductList: function () {
       this.$router.push('/')
     },
     clearAttributeFields: function () {
-      this.model.attributes.size = null
+      this.model.attributes.size_mb = null
       this.model.attributes.weight = null
       this.model.attributes.height = null
-      this.model.attributes.wide = null
+      this.model.attributes.width = null
       this.model.attributes.length = null
     },
     removeNullFields: function () {
@@ -73,7 +94,7 @@ export default {
       setTimeout(() => {
         this.error.errorState = false
         this.error.errorMessage = ''
-      },500)
+      }, 500)
     }
   }
 }
@@ -85,7 +106,7 @@ export default {
       <h1>Add Product </h1>
       <VSpacer class="spacer"/>
       <VBtn color="deep-purple-accent-3" @click="saveProduct">Save</VBtn>
-      <VMessages :messages=this.error.errorMessage :active=this.error.errorState id="error-message"></VMessages>
+      <VMessages :messages=error.errorMessage :active=error.errorState id="error-message"></VMessages>
       <VBtn id="cancel-btn" variant="outlined" color="deep-purple-accent-3" @click="backToProductList">Cancel</VBtn>
     </VContainer>
 
@@ -217,9 +238,7 @@ export default {
               >
               </VTextField>
             </VRow>
-            <p v-if="productType === 'DVD'" class="description">Please, provide size</p>
-            <p v-if="productType === 'Book'" class="description">Please, provide weight</p>
-            <p v-if="productType === 'Furniture'" class="description">Please, provide dimensions</p>
+            <p class="description">{{ descriptionCopy }}</p>
           </div>
         </VCard>
       </VForm>

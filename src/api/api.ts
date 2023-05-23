@@ -15,7 +15,7 @@ export async function getProducts(): Promise<AxiosResponse | AxiosError> {
 export async function saveProduct(data: string): Promise<AxiosResponse | AxiosError> {
 	return await axios.post(API_URL + '/addProduct', data, axiosConfig)
 }
-export async function deleteProduct(data: string): Promise<AxiosResponse | AxiosError> {
+export async function deleteProduct(data: number[]): Promise<AxiosResponse<any,any>> {
 	let axiosDeleteConfig = {
 		headers:{
 

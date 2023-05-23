@@ -66,7 +66,7 @@ export default {
     </VContainer>
 
     <VContainer class="product-container-main">
-      <Product v-for="product in this.model.products" :product="product"
+      <Product v-for="product in model.products" :product="product"
                @updateDeleteList="updateDeleteList"/>
     </VContainer>
   </div>

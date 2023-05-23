@@ -5,13 +5,14 @@ export interface ProductInterface {
 }
 
 export interface ProductAttributes {
+	[k: string]: string | number | null,
 	name: string,
 	price_usd: number,
-	weight?: number,
-	size_mb?: number,
-	width?: number,
-	height?: number,
-	length?: number
+	weight: number,
+	size_mb: number,
+	width: number,
+	height: number,
+	length: number
 }
 
 export interface ProductListModel {
