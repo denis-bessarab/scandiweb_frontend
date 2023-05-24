@@ -39,8 +39,6 @@ export default {
           return 'Please, provide weight'
         case 'Furniture':
           return 'Please, provide dimensions'
-        default :
-          return ''
       }
 
     }
@@ -152,7 +150,7 @@ export default {
         <VRow>
           <div class="ugly_select_for_test_container">
             <label for="productType" class="ugly_select_for_test_label">Select Product Type</label>
-            <select class="ugly_select_for_test" id="productType" name="productType" v-model="productType" @update:model-value="clearAttributeFields();clearRequestErrorField()" required>
+            <select class="ugly_select_for_test v-card-title" id="productType" name="productType" v-model="productType" @update:model-value="clearAttributeFields();clearRequestErrorField()" required>
               <option value="DVD">{{selectItems[0]}}</option>
               <option value="Book">{{selectItems[1]}}</option>
               <option value="Furniture">{{selectItems[2]}}</option>
@@ -246,8 +244,8 @@ export default {
               >
               </VTextField>
             </VRow>
-            <p class="description">{{ descriptionCopy }}</p>
           </div>
+          <p class="description">{{ descriptionCopy }}</p>
         </VCard>
       </VForm>
     </VContainer>

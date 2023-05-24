@@ -33,12 +33,9 @@
   }
 
   .ugly_select_for_test {
-    border: 1px solid #B0BEC5;
-    background-color: rgba(176, 190, 197, 0.1);
+    padding: 0 20px 20px 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
     width: 100%;
-    max-width: 142px;
-    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
-    font-size: 0.875rem;
     option {
       color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
     }
@@ -52,15 +49,13 @@
     font-size: 0.875rem;
   }
 
-
-  
-  @media screen and (max-width: 450px) {
-    .ugly_select_for_test {
+  @media screen and (max-width: 600px) {
+    .ugly_select_for_test_label,.ugly_select_for_test {
       max-width: calc(100% - 40px);
     }
   }
 
-
+//------------------------------------------------
 
   .v-card {
     display: flex;
