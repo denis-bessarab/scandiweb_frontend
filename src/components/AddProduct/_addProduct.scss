@@ -25,6 +25,7 @@
     margin-left: 20px;
     margin-top: 20px;
     max-width: calc(400px + 10%);
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !important;
   }
   .ugly_select_for_test_container {
     display: flex;
@@ -37,7 +38,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.38);
     width: 100%;
     option {
-      color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+      color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !important;
     }
   }
 
@@ -67,7 +68,7 @@
 
   .v-card-title {
     padding:20px;
-
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !important;
   }
 
   .attribute-field {
