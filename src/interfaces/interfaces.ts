@@ -11,13 +11,7 @@ export interface ProductInterface {
 	height_cm: null | number,
 	length_cm: null | number
 }
-// export interface ProductAttributes {
-// 	weight_kg?: number,
-// 	size_mb?: number,
-// 	width_cm?: number,
-// 	height_cm?: number,
-// 	length_cm?: number
-// }
+
 
 export interface ProductListModel {
 	products: ProductInterface[],
@@ -35,10 +29,3 @@ export interface AddProductModel {
 	width_cm: null | number,
 	length_cm: null | number,
 }
-
-// export interface ProductToSave {
-// 	sku: string,
-// 	name: string,
-// 	price_usd: number,
-// 	attributes: ProductAttributes
-// }

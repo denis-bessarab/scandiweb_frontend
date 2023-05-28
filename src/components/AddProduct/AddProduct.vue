@@ -72,13 +72,13 @@ export default {
     },
     clearAttributeFields: function () {
       this.model.size_mb = null
-      this.model.weight = null
-      this.model.height = null
-      this.model.width = null
-      this.model.length = null
+      this.model.weight_kg = null
+      this.model.height_cm = null
+      this.model.width_cm = null
+      this.model.length_cm = null
     },
     removeNullFields: function (productData : object) {
-      productData.attributes = Object.fromEntries(Object.entries(productData).filter(entry => {
+      productData = Object.fromEntries(Object.entries(productData).filter(entry => {
         return entry[1] != null
       }))
       return productData
