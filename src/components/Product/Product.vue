@@ -18,14 +18,14 @@ export default {
       <VContainer>
         <VCheckbox class="delete-checkbox" color="deep-purple-accent-3" @input="$emit('updateDeleteList',product.id)" />
         <h4>{{product.sku}}</h4>
-        <p>{{product.attributes.name}}</p>
-        <p>{{product.attributes.price_usd}} $</p>
-        <p v-if="product.attributes.height">
+        <p>{{product.product_name}}</p>
+        <p>{{product.price_usd}} $</p>
+        <p v-if="product.product_type === 'Furniture'">
           Dimensions:
-          {{product.attributes.height}}x{{product.attributes.width}}x{{product.attributes.length}}
+          {{product.height_cm}}x{{product.width_cm}}x{{product.length_cm}}
         </p>
-        <p v-if="product.attributes.size_mb">{{product.attributes.size_mb}} MB</p>
-        <p v-if="product.attributes.weight">{{product.attributes.weight}} Kg</p>
+        <p v-if="product.product_type === 'DVD'">Size: {{product.size_mb}} MB</p>
+        <p v-if="product.product_type === 'Book'">Weight: {{product.weight_kg}} Kg</p>
       </VContainer>
     </VCard>
   </div>

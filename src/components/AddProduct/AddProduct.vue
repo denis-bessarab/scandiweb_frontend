@@ -1,5 +1,5 @@
 <script lang="ts">
-import {saveProduct} from "../../api/api.ts";
+import {createProduct} from "../../api/api.ts";
 import {AxiosError, AxiosResponse} from "axios";
 import {AddProductModel} from "../../interfaces/interfaces.ts";
 
@@ -8,18 +8,16 @@ export default {
     return {
       model: {
         sku: null,
-        attributes: {
-          name: null,
-          price_usd: null,
-          size_mb: null,
-          weight: null,
-          height: null,
-          width: null,
-          length: null,
-        }
+        product_name: null,
+        price_usd: null,
+        product_type: null,
+        size_mb: null,
+        weight_kg: null,
+        height_cm: null,
+        width_cm: null,
+        length_cm: null,
       } as AddProductModel,
       selectItems: ["DVD", 'Book', 'Furniture'] as string[],
-      productType: null as null | string,
       rules: {
         required: (value: string) => !!value || 'Please, submit required data',
         number: (value: string) => /^\d+(([.])+[0-9]{1,2})?$/.test(value) || 'Please, provide the data of indicated type'
@@ -32,7 +30,7 @@ export default {
   },
   computed: {
     descriptionCopy() {
-      switch (this.productType) {
+      switch (this.model.product_type) {
         case 'DVD':
           return 'Please, provide size'
         case 'Book':
@@ -50,8 +48,7 @@ export default {
           form.validate()
           .then((res: { valid: boolean }) => {
             if (res.valid) {
-              let data = JSON.stringify(this.removeNullFields())
-              saveProduct(data)
+              createProduct(JSON.stringify(this.model))
                   .then((res: AxiosResponse) => {
                     if (res.status === 200) {
                       this.$router.push('/')
@@ -74,15 +71,14 @@ export default {
       this.$router.push('/')
     },
     clearAttributeFields: function () {
-      this.model.attributes.size_mb = null
-      this.model.attributes.weight = null
-      this.model.attributes.height = null
-      this.model.attributes.width = null
-      this.model.attributes.length = null
+      this.model.size_mb = null
+      this.model.weight = null
+      this.model.height = null
+      this.model.width = null
+      this.model.length = null
     },
-    removeNullFields: function () {
-      let productData = this.model
-      productData.attributes = Object.fromEntries(Object.entries(productData.attributes).filter(entry => {
+    removeNullFields: function (productData : object) {
+      productData.attributes = Object.fromEntries(Object.entries(productData).filter(entry => {
         return entry[1] != null
       }))
       return productData
@@ -126,7 +122,7 @@ export default {
           <VTextField
               variant="underlined"
               density="comfortable"
-              v-model="model.attributes.name"
+              v-model="model.product_name"
               id="name"
               :rules="[rules.required]"
               @update:model-value="clearRequestErrorField"
@@ -139,7 +135,7 @@ export default {
               variant="underlined"
               density="comfortable"
 
-              v-model="model.attributes.price_usd"
+              v-model="model.price_usd"
               min="0"
               id="price"
               :rules="[rules.required,rules.number]"
@@ -150,7 +146,7 @@ export default {
         <VRow>
           <div class="ugly_select_for_test_container">
             <label for="productType" class="ugly_select_for_test_label">Select Product Type</label>
-            <select class="ugly_select_for_test v-card-title" id="productType" name="productType" v-model="productType" @update:model-value="clearAttributeFields();clearRequestErrorField()" required>
+            <select class="ugly_select_for_test v-card-title" id="productType" name="productType" v-model="model.product_type" @update:model-value="clearAttributeFields();clearRequestErrorField()" required>
               <option value="DVD">{{selectItems[0]}}</option>
               <option value="Book">{{selectItems[1]}}</option>
               <option value="Furniture">{{selectItems[2]}}</option>
@@ -169,15 +165,15 @@ export default {
 <!--          </VSelect>-->
         </VRow>
 
-        <VCard v-if="productType !== null" class="bg-blue-grey-lighten-5" id="{{this.productType}}">
+        <VCard v-if="model.product_type !== null" class="bg-blue-grey-lighten-5" id="{{this.model.product_type}}">
           <VCardTitle>Product Attributes:</VCardTitle>
-          <VRow v-if="productType === 'DVD'">
+          <VRow v-if="model.product_type === 'DVD'">
             <VListSubheader>Size (MB)</VListSubheader>
             <VTextField
                 class="attribute-field"
                 variant="underlined"
                 density="comfortable"
-                v-model="model.attributes.size_mb"
+                v-model="model.size_mb"
                 min="0"
                 id="size"
                 :rules="[rules.required,rules.number]"
@@ -186,13 +182,13 @@ export default {
             </VTextField>
           </VRow>
 
-          <VRow v-if="productType === 'Book'">
+          <VRow v-if="model.product_type === 'Book'">
             <VListSubheader>Weight (KG)</VListSubheader>
             <VTextField
                 class="attribute-field"
                 variant="underlined"
                 density="comfortable"
-                v-model="model.attributes.weight"
+                v-model="model.weight_kg"
                 min="0"
                 id="weight"
                 :rules="[rules.required,rules.number]"
@@ -201,14 +197,14 @@ export default {
             </VTextField>
           </VRow>
 
-          <div v-if="productType === 'Furniture'">
+          <div v-if="model.product_type === 'Furniture'">
             <VRow>
               <VListSubheader>Height (CM)</VListSubheader>
               <VTextField
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
-                  v-model="model.attributes.height"
+                  v-model="model.height_cm"
                   min="0"
                   id="height"
                   :rules="[rules.required,rules.number]"
@@ -222,7 +218,7 @@ export default {
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
-                  v-model="model.attributes.width"
+                  v-model="model.width_cm"
                   min="0"
                   id="width"
                   :rules="[rules.required,rules.number]"
@@ -236,7 +232,7 @@ export default {
                   class="attribute-field"
                   variant="underlined"
                   density="comfortable"
-                  v-model="model.attributes.length"
+                  v-model="model.length_cm"
                   min="0"
                   id="length"
                   :rules="[rules.required,rules.number]"

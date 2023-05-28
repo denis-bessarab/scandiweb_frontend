@@ -11,8 +11,8 @@ export async function getProducts(): Promise<AxiosResponse> {
 	return await axios.get(API_URL + '/getProducts', axiosConfig)
 }
 
-export async function saveProduct(data: string): Promise<AxiosResponse> {
-	return await axios.post(API_URL + '/addProduct', data, axiosConfig)
+export async function createProduct(data: string): Promise<AxiosResponse> {
+	return await axios.post(API_URL + '/createProduct', data, axiosConfig)
 }
 export async function deleteProduct(data: number[]): Promise<AxiosResponse> {
 	let axiosDeleteConfig = {
@@ -23,5 +23,5 @@ export async function deleteProduct(data: number[]): Promise<AxiosResponse> {
 			source: data
 		}
 	}
-	return await axios.delete(API_URL + '/deleteProduct', axiosDeleteConfig)
+	return await axios.delete(API_URL + '/deleteProducts', axiosDeleteConfig)
 }
