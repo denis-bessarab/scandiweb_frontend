@@ -33,7 +33,6 @@ export default {
       getProducts()
           .then((res: AxiosResponse) => {
             this.model.products = res.data
-            console.log(res)
           })
           .catch((err: AxiosError) => {
             console.log(err)
